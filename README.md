@@ -5,9 +5,9 @@ Telegram bot that sends user notifications about cryptocurrency transfers
 
 1. Setup your bot with [@botfather](https://t.me/botfather)
 
-2. Create a `.env` file and insert the key obtained with [@botfather](https://t.me/botfather), in the following format:
+2. Create a `.env` file and insert the token obtained with [@botfather](https://t.me/botfather), in the following format:
 ```
-TELOXIDE_TOKEN="
+TELOXIDE_TOKEN=<Your token here>
 ``` 
 
 3. Add desired chains to [state::CHAINS_INFO](./src/state.rs) and [state::AVAILABLE_CHAINS](./src/state.rs).
