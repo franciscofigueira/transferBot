@@ -7,31 +7,31 @@ use teloxide::types::ChatId;
 lazy_static! {
     pub static ref CHAINS_INFO: HashMap<u32, ChainInfo> = {
         let mut m = HashMap::new();
-        m.insert(
-            0,
-            ChainInfo {
-                id: 0,
-                name: "Local",
-                scanner_url: "https://sepolia.etherscan.io/",
-                ws: "ws://localhost:8545",
-            },
-        );
-
         // m.insert(
-        //     11155111,
+        //     0,
         //     ChainInfo {
-        //         id: 11155111,
-        //         name: "ETH Sepolia",
+        //         id: 0,
+        //         name: "Local",
         //         scanner_url: "https://sepolia.etherscan.io/",
-        //         ws: "wss://sepolia.gateway.tenderly.co",
+        //         ws: "ws://localhost:8545",
         //     },
         // );
+
+        m.insert(
+            11155111,
+            ChainInfo {
+                id: 11155111,
+                name: "ETH Sepolia",
+                scanner_url: "https://sepolia.etherscan.io/",
+                ws: "wss://sepolia.gateway.tenderly.co",
+            },
+        );
         m
     };
     pub static ref AVAILABLE_CHAINS: HashMap<&'static str, u32> = {
         let mut m = HashMap::new();
-        m.insert("Local", 0);
-       // m.insert("ETH Sepolia", 11155111);
+        // m.insert("Local", 0);
+        m.insert("ETH Sepolia", 11155111);
         m
     };
 }
