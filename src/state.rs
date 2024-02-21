@@ -4,12 +4,6 @@ use lazy_static::lazy_static;
 use std::collections::{HashMap, HashSet};
 use teloxide::types::ChatId;
 
-pub struct ChainInfo {
-    pub id: u32,
-    pub name: &'static str,
-    pub scanner_url: &'static str,
-    pub ws: &'static str,
-}
 lazy_static! {
     pub static ref CHAINS_INFO: HashMap<u32, ChainInfo> = {
         let mut m = HashMap::new();
@@ -42,6 +36,13 @@ lazy_static! {
     };
 }
 
+pub struct ChainInfo {
+    pub id: u32,
+    pub name: &'static str,
+    pub scanner_url: &'static str,
+    pub ws: &'static str,
+}
+
 #[derive(Debug)]
 pub struct Subscription {
     chain_id: u32,
@@ -54,7 +55,7 @@ pub struct State {
     //chain Id -> token address -> user address -> subscribed users
     pub subs: HashMap<u32, HashMap<Address, HashMap<Address, HashSet<ChatId>>>>,
     pub user_subs: HashMap<ChatId, Vec<Subscription>>,
-    //chain Id -> token Address -> (name, symbol,deicmals)
+    //chain Id -> token Address -> (name, symbol,decimals)
     pub cached_token_metadata: HashMap<u32, HashMap<Address, (String, String, u8)>>,
 }
 
@@ -97,7 +98,7 @@ impl State {
     ) {
         self.cached_token_metadata
             .get_mut(chain_id)
-            .expect("chain exists")
+            .expect("chain will exist")
             .insert(token_address, (token_name, token_symbol, decimals));
     }
 
@@ -158,7 +159,7 @@ impl State {
         token_sender_receiver: Address,
         user_id: ChatId,
     ) {
-        let tokens = self.subs.get_mut(&chain_id).expect("chain exists");
+        let tokens = self.subs.get_mut(&chain_id).expect("chain will exist");
 
         match tokens.get_mut(&token_address) {
             Some(addresses) => match addresses.get_mut(&token_sender_receiver) {

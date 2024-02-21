@@ -106,7 +106,7 @@ async fn invalid_state(bot: Bot, msg: Message) -> HandlerResult {
     Ok(())
 }
 
-async fn cancel(bot: Bot, dialogue: MyDialogue, msg: Message) -> HandlerResult {
+async fn cancel(bot: Bot, msg: Message, dialogue: MyDialogue) -> HandlerResult {
     bot.send_message(msg.chat.id, "Cancelling the subscription process.")
         .await?;
     dialogue.exit().await?;
@@ -119,7 +119,7 @@ async fn help(bot: Bot, msg: Message) -> HandlerResult {
     Ok(())
 }
 
-async fn subscribe(bot: Bot, dialogue: MyDialogue, msg: Message) -> HandlerResult {
+async fn subscribe(bot: Bot, msg: Message, dialogue: MyDialogue) -> HandlerResult {
     bot.send_message(msg.chat.id, "Let's start! Select desired chain.")
         .await?;
     let chains = AVAILABLE_CHAINS
@@ -195,10 +195,10 @@ async fn receive_chain_id(bot: Bot, dialogue: MyDialogue, q: CallbackQuery) -> H
 
 async fn receive_token_address(
     bot: Bot,
-    dialogue: MyDialogue,
-    chain_id: u32, // Available from `ChatState::ReceiveChainID`.
-    state: Arc<RwLock<State>>,
     msg: Message,
+    dialogue: MyDialogue,
+    state: Arc<RwLock<State>>,
+    chain_id: u32, // Available from `ChatState::ReceiveChainID`.
 ) -> HandlerResult {
     match msg.text().map(ToOwned::to_owned) {
         Some(token_address) => {
@@ -265,10 +265,10 @@ async fn receive_token_address(
 
 async fn receive_user(
     bot: Bot,
+    msg: Message,
     dialogue: MyDialogue,
     state: Arc<RwLock<State>>,
     (chain_id, token_address): (u32, Address), // Available from `ChatState::ReceiveTokenAddress`.
-    msg: Message,
 ) -> HandlerResult {
     match msg.text().map(ToOwned::to_owned) {
         Some(user_address) => {

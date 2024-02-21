@@ -13,7 +13,7 @@ use state::{State, CHAINS_INFO};
 async fn main() -> Result<()> {
     dotenvy::dotenv()?;
 
-    let api_key = dotenvy::var("TELOXIDE_TOKEN").unwrap();
+    let api_key = dotenvy::var("TELOXIDE_TOKEN").expect("valid key exists in .env");
     let bot = Bot::new(api_key);
     let state = Arc::new(RwLock::new(State::new()));
 
