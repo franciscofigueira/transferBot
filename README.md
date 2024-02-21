@@ -10,7 +10,7 @@ Telegram bot that sends user notifications about cryptocurrency transfers
 TELOXIDE_TOKEN="
 ``` 
 
-3. Add desired chains to [state::CHAINS_INFO](./src/state.rs) and [state::AVAIALBLE_CHAINS](./src/state.rs).
+3. Add desired chains to [state::CHAINS_INFO](./src/state.rs) and [state::AVAILABLE_CHAINS](./src/state.rs).
 
 4. Install [Rust](https://www.rust-lang.org/learn/get-started), and run:
 ```
@@ -19,18 +19,18 @@ cargo run
 
 ## Using the Bot
 ### Commands
-#### `\subscribe`
+#### `/subscribe`
 Iniates the subscription proccess to receive notification upon target token transfer, from/to specific user.
-#### `\cancel`
+#### `/cancel`
 Cancel subscription proccess.
 
-#### `\subs` 
+#### `/subs` 
 List all current subscriptions and their id.
 
-#### `\unsubscribe <sub_id>`
+#### `/unsubscribe <sub_id>`
 Unsubscribe notifications of subscription.
 
-#### `\help`
+#### `/help`
 List all available commands.
 
 
