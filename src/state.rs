@@ -28,7 +28,7 @@ lazy_static! {
         //     ChainInfo {
         //         id: 11155111,
         //         name: "ETH Sepolia",
-        //         explorer_url: "https://sepolia.etherscan.io/",
+        //         scanner_url: "https://sepolia.etherscan.io/",
         //         ws: "wss://sepolia.gateway.tenderly.co",
         //     },
         // );
@@ -37,7 +37,7 @@ lazy_static! {
     pub static ref AVAILABLE_CHAINS: HashMap<&'static str, u32> = {
         let mut m = HashMap::new();
         m.insert("Local", 0);
-        //m.insert("ETH Sepolia", 11155111);
+       // m.insert("ETH Sepolia", 11155111);
         m
     };
 }
